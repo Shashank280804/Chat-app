@@ -1,42 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Title of the webpage -->
     <title>Chat App</title>
+    <!-- Favicon for the webpage -->
     <link rel="icon" href="/img/favicon.png" />
+    <!-- External CSS file for styling -->
     <link rel="stylesheet" href="/css/styles.min.css" />
   </head>
   <body>
+    <!-- Main chat container -->
     <div class="chat">
-      <div id="sidebar"   class="chat__sidebar"></div>
+      <!-- Sidebar container -->
+      <div id="sidebar" class="chat__sidebar"></div>
+      <!-- Main chat area -->
       <div class="chat__main">
+        <!-- Container for displaying messages -->
         <div id="messages" class="chat__messages"></div>
 
+        <!-- Message composing section -->
         <div class="compose">
+          <!-- Form for sending messages -->
           <form id="message-form">
+            <!-- Input field for typing messages -->
             <input name="message" placeholder="Message" required autocomplete="off">
+            <!-- Button for sending messages -->
             <button>Send</button>
           </form>
+          <!-- Button for sending location -->
           <button id="send-location">Send location</button>
         </div>
       </div>
     </div>
 
+    <!-- Mustache templates for rendering messages and sidebar -->
     <script id="message-template" type="text/html">
+      <!-- Template for regular text messages -->
       <div class="message">
         <p>
+          <!-- Username of the sender -->
           <span class="message__name">{{username}}</span>
+          <!-- Timestamp of the message -->
           <span class="message_meta">{{createdAt}}</span>
         </p>
+        <!-- Content of the message -->
         <p>{{message}}</p>
       </div>
     </script>
 
     <script id="location-message-template" type="text/html">
+      <!-- Template for location sharing messages -->
       <div>
         <p>
+          <!-- Username of the sender -->
           <span class="message__name">{{username}}</span>
+          <!-- Timestamp of the message -->
           <span class="message_meta">{{createdAt}}</span>
         </p>
+        <!-- Link to the shared location -->
         <p>
           <a href="{{url}}" target="_blank">My current location</a>
         </p>
@@ -44,20 +65,29 @@
     </script>
 
     <script id="sidebar-template" type="text/html">
+        <!-- Template for the sidebar displaying room and users -->
         <h2 class="room-title">{{room}}</h2>
         <h3 class="list-title">Users</h3>
+        <!-- List of users in the chat room -->
         <ul class="users">
+             <!-- Loop through each user and display their username -->
              {{#users}}
                 <li>{{username}}</li>
              {{/users}}
         </ul>
     </script>
 
+    <!-- External JavaScript libraries -->
+    <!-- Mustache.js for templating -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <!-- Moment.js for handling timestamps -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <!-- qs.js for handling query strings -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
 
+    <!-- Socket.io library for real-time communication -->
     <script src="/socket.io/socket.io.js"></script>
+    <!-- Custom JavaScript file for chat functionality -->
     <script src="/js/chat.js"></script>
   </body>
 </html>
